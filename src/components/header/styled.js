@@ -45,6 +45,10 @@ export const Top = styled.div `
 		height: 2em;
 		color: #FFF;
 	}
+	div > span {
+		font-size: .8em;
+		color: #FF0000;
+	}
 
 	@media(max-width: 680px) {
 		align-items: center;
