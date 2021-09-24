@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Desafio Nata.House - Stop Wars
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Resumo:
 
-## Available Scripts
+Este desafio consiste na criação de um projeto em ReactJS, onde o propósito deste, é consumir dados da api gratuita fornecida pela https://swapi.dev/. Com tais informações consumidas precisamos mostrar em tela a quantidade de paradas necessárias para cada Starships, de acordo com a distância inserida pelo usuário.
 
-In the project directory, you can run:
+### Instruções básicas
 
-### `npm start`
+Para ter acesso a este projeto em sua máquina local, basta fazer o git clone do repositório em seu editor. Após a finalização do clone, é necessário acessar a pasta do repositório com o cd 'nome-da-pasta' e inserir a linha de comando npm-start.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Introdução
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Este projeto foi criado para o cumprimento da etapa técnica do processo seletivo da Nata.House. Nesta etapa, o participante -eu- tem que criar um projeto com base em javaScript e fazendo uso do framework/biblioteca de preferência, por este motivo optei pela utilização do ReactJS.
 
-### `npm test`
+## O que foi utilizado?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Juntamente com React, foi utilizado recursos que auxiliassem o andamento e conclusão dos projeots. Dentre eles, estão:
 
-### `npm run build`
+Axios - Para consumir a API da SWAPI;
+Context API - Para fazer a distribuição dos dados da API para a página;
+Moment - Utilizado para fazer a conversão de dias, meses e anos - em horas;
+Styled Components - Utilizado para criar uma estilização mais otimizada;
+React-Router-Dom - Para gerenciar as mudanças de páginas sem perder os dados;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Principal objetivo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Dado um valor representando uma distância em MGLT(mega lights) pelo usuário, é necessário mostrar em tela a quantidade de paradas por Starships.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para chegar neste resultado foi necessário compreender como funciona a relação entre os dados fornecidos e o que impactaria no resultado. Com isso, conclui-se que o resultado final depende de três elementos:
 
-### `npm run eject`
+Distância em MGLT;
+O MGLT da Starship;
+E o tempo de consumo de cada Starship, descrita na API como consumables;
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O calculo ficara da seguinte maneira.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Primeiro - Converter o tempo de consumo (consumables) em horas; _ ESTA CONVERSÃO FOI FEITA UTILIZANDO O MOMENT _
+Segundo - Dividir a distancia inserida pelo usuário pelo MGLT da Starship; (distância / MGLT)
+Terceiro - Dividir o resultado em horas do consumable pelo resultado de distancia / MGLT; Este resultado arredondado para baixo, trará o valor que esperamos. Em outras palavra o cálculo ficará da seguinte maneira:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    	export const calculoDeParadas = (distancia, mglt, tempoDeConsumo) => {
+    		const [tempo, unidade] = tempoDeConsumo.split(" ");
+    		const tempoDeConsumoPorHr = moment.duration(tempo, unidade).asHours();
+    		const horas = distancia / mglt;
+    		const consumoHora = tempoDeConsumoPorHr;
+    		const paradas = horas / consumoHora;
+    		return Math.floor(paradas);
+    	};
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Encerramento
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Com o cálculo resolvido bastou somente montar toda a estruta do nosso Front-End, nos comunicar com a API utilizando o Axios, compartilhar os dados com o Context API, organizar por Rotas com o React-router-dom e estilizar com o Styled Component. Criando uma tela temática, simples, objetiva e agradável.
