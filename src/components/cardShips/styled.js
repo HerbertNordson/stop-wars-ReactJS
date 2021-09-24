@@ -21,15 +21,21 @@ export const CardShips = styled.article `
 	border-radius: .5em;
 	padding: 1em;
 	margin-bottom: 2em;
-	
+	width: 40%;
+	overflow: hidden;
+
 	h1 {
 		border-top: 2px solid rgb(162,111,49);
 		margin: auto;
 		padding-top: .5em;
 	}
+
+	@media(max-width:680px){
+		width: 90%;
+	}
 `;
 
-export const MGLT = styled.div ` 
+export const Resultado = styled.div ` 
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -39,6 +45,7 @@ export const MGLT = styled.div `
 	padding-bottom: 1em;
 
 	h2 {
+		display: block;
 		text-align: center;
 		font-size: 8em;
 		color: rgb(162,111,49);
@@ -47,5 +54,15 @@ export const MGLT = styled.div `
 		text-align: end;
 		font-size: 1.4em;
 		margin-top: -1.2em;
+	}
+
+	@media(max-width:680px){
+
+		h2 {
+			font-size: 4em;
+		}
+		span {
+			margin-top: 0;
+		}
 	}
 `;

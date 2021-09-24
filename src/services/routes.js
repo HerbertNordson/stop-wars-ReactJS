@@ -1,19 +1,23 @@
 import React from "react"
 import { Switch, Route} from 'react-router-dom';
+import { Container } from "../assets/styled/styled-global";
 
 import Home from '../pages/Home'
-import ListView from "../pages/ListShips";
+import Header from "../components/header";
+import Footer from "../components/footer";
+
 
 const Routes = () => {
 	return (
-		<Switch>
-			<Route exact path="/" component={ Home }>
-				<Home />
-			</Route>
-			<Route path="/list" component={ Home }>
-				<ListView />
-			</Route>
-		</Switch>
+		<Container>
+			<Header/>
+			<Switch>
+				<Route exact path="/" component={ Home }>
+					<Home />
+				</Route>
+			</Switch>
+			<Footer />
+		</Container>
 	)
 } 
 

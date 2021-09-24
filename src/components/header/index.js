@@ -15,27 +15,30 @@ const Header = () => {
 	const history = useHistory();
 
 	async function getUserData() {
-		try {
-
-			const response = await api.get(`/starships/`);
-			ctx.setDistancia(response.data);
-			console.log (response.data);
-			history.push('/list');
-
-		} catch(err) {
-			if (valor !== '') {
-				alert('Error 403: Servidor não está respondendo!');
-				setObrigatrio(false);
-			} else {
-				setObrigatrio(true);
+		if (valor === ''){
+			setObrigatrio(true);
+		} else {
+			try {
+	
+				const response = await api.get(`/starships/`);
+				ctx.setData(response.data.results);
+				ctx.setDistancia(valor);
+			} catch(err) {
+					alert('Error 403: Servidor não está respondendo!');
+					setObrigatrio(false);
 			}
 		}
 	}
+
+	function handleClick() {
+		history.push("/");
+	}
+
 	return (
 		<Top>
-			<img src={stopWars}  alt="logo-stopWars" href="/"/>
+			<img src={stopWars}  alt="logo-stopWars" onClick={handleClick}/>
 			<div>
-				<input placeholder="Insira aqui a distância" value={valor} onChange={e => setValor(e.target.value)}/>
+				<input type="number" placeholder="Insira aqui a distância" value={valor} onChange={e => setValor(e.target.value)}/>
 				<button onClick={getUserData}></button>
 				{obrigatorio ? 
 					<span>Campo obrigatório</span>

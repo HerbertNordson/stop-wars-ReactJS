@@ -1,79 +1,26 @@
 import React from "react";
-import { List, CardShips, MGLT } from './styled'
+import { List, CardShips, Resultado } from './styled'
+
+import { calculoDeParadas } from '../../utils/calculator'
+
+const Card = props => {
+	const resultado = props.dist;
+	const data = props.info;
 
 
-const Card = () => {
 	return (
 		<List>
+			{(data).map(ctxData => (
 			<CardShips>
 				<div>
-					<MGLT>
-						<h2>2</h2>
+					<Resultado>
+						<h2>{calculoDeParadas(resultado, ctxData.MGLT, ctxData.consumables )}</h2>
 						<span>MGLT</span>
-					</MGLT>
+					</Resultado>
 				</div>
-				<h1>Millennium Falcon</h1>
+				<h1>{ctxData.name}</h1>
 			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
-			<CardShips>
-				<div>
-					<MGLT>
-						<h2>2</h2>
-						<span>MGLT</span>
-					</MGLT>
-				</div>
-				<h1>Millennium Falcon</h1>
-
-			</CardShips>
+			))}
 		</List>
 	)
 }
